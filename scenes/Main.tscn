@@ -1,0 +1,53 @@
+[gd_scene load_steps=3 format=3 uid="uid://main001"]
+
+[ext_resource type="Script" path="res://scripts/main.gd" id="1_main"]
+[ext_resource type="PackedScene" uid="uid://player001" path="res://scenes/Player.tscn" id="2_player"]
+
+; ── Scene tree ──────────────────────────────────────────────────────────────
+; Main (Node2D)              ← root node, runs main.gd, draws the starfield
+;   Player                   ← the turtle (instanced from Player.tscn)
+;   Gears     (Node2D)       ← empty container; gears are added here at runtime
+;   Asteroids (Node2D)       ← empty container; asteroids added here at runtime
+;   UI (CanvasLayer)         ← UI always drawn on top, independent of camera
+;     ScoreLabel (Label)     ← top-left score counter
+;     WinLabel   (Label)     ← centred win message (hidden until you win)
+
+[node name="Main" type="Node2D"]
+script = ExtResource("1_main")
+
+; Player starts in the middle of the screen
+[node name="Player" parent="." instance=ExtResource("2_player")]
+position = Vector2(512.0, 300.0)
+
+; Containers for runtime-spawned objects
+[node name="Gears" type="Node2D" parent="."]
+[node name="Asteroids" type="Node2D" parent="."]
+
+; HUD – always on top
+[node name="UI" type="CanvasLayer" parent="."]
+
+; Score label – top-left corner
+[node name="ScoreLabel" type="Label" parent="UI"]
+offset_left = 20.0
+offset_top = 20.0
+offset_right = 340.0
+offset_bottom = 60.0
+text = "Gears: 0 / 10"
+theme_override_font_sizes/font_size = 24
+theme_override_colors/font_color = Color(1.0, 1.0, 1.0, 1.0)
+
+; Win label – centred on screen, hidden at start
+[node name="WinLabel" type="Label" parent="UI"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -260.0
+offset_top = -40.0
+offset_right = 260.0
+offset_bottom = 40.0
+text = "YOU WIN! Great job! :)"
+horizontal_alignment = 1
+theme_override_font_sizes/font_size = 36
+theme_override_colors/font_color = Color(1.0, 0.9, 0.1, 1.0)
+visible = false
