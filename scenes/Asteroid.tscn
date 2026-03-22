@@ -1,6 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://asteroid001"]
+[gd_scene load_steps=4 format=3 uid="uid://asteroid001"]
 
-[ext_resource type="Script" path="res://scripts/asteroid.gd" id="1_asteroid"]
+[ext_resource type="Script"    path="res://scripts/asteroid.gd" id="1_asteroid"]
+[ext_resource type="Texture2D" path="res://assets/asteroid.svg"  id="2_asteroid"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_1"]
 radius = 24.0
@@ -8,7 +9,7 @@ radius = 24.0
 ; ── Scene tree ──────────────────────────────────────────────────────────────
 ; Asteroid (Area2D)          ← detects when the player touches it
 ;   CollisionShape2D         ← invisible circle used for overlap detection
-;   RockShape (Polygon2D)    ← grey bumpy blob = the rock
+;   Sprite                   ← rocky metallic asteroid SVG (64×64 px, centred)
 
 [node name="Asteroid" type="Area2D"]
 script = ExtResource("1_asteroid")
@@ -16,7 +17,5 @@ script = ExtResource("1_asteroid")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_1")
 
-; Irregular grey blob (8 points at varying radii to look like a bumpy rock)
-[node name="RockShape" type="Polygon2D" parent="."]
-color = Color(0.52, 0.5, 0.47, 1.0)
-polygon = PackedVector2Array(25, 0, 14.14, 14.14, 0, 28, -15.56, 15.56, -25, 0, -12.73, -12.73, 0, -26, 16.26, -16.26)
+[node name="Sprite" type="Sprite2D" parent="."]
+texture = ExtResource("2_asteroid")

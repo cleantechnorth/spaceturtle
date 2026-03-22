@@ -1,6 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://gear001"]
+[gd_scene load_steps=4 format=3 uid="uid://gear001"]
 
-[ext_resource type="Script" path="res://scripts/gear.gd" id="1_gear"]
+[ext_resource type="Script"    path="res://scripts/gear.gd"  id="1_gear"]
+[ext_resource type="Texture2D" path="res://assets/gear.svg"  id="2_gear"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_1"]
 radius = 15.0
@@ -8,7 +9,7 @@ radius = 15.0
 ; ── Scene tree ──────────────────────────────────────────────────────────────
 ; Gear (Area2D)              ← detects when the player enters it
 ;   CollisionShape2D         ← invisible circle used for overlap detection
-;   GearShape (Polygon2D)    ← golden 6-tooth star shape
+;   Sprite                   ← brass clockwork gear SVG (56×56 px, centred)
 
 [node name="Gear" type="Area2D"]
 script = ExtResource("1_gear")
@@ -16,8 +17,5 @@ script = ExtResource("1_gear")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_1")
 
-; Golden star with 6 outer points (r=15) and 6 inner points (r=8)
-; Points alternate outer → inner around the circle to make a gear / star shape
-[node name="GearShape" type="Polygon2D" parent="."]
-color = Color(1.0, 0.8, 0.1, 1.0)
-polygon = PackedVector2Array(15, 0, 6.93, 4, 7.5, 12.99, 0, 8, -7.5, 12.99, -6.93, 4, -15, 0, -6.93, -4, -7.5, -12.99, 0, -8, 7.5, -12.99, 6.93, -4)
+[node name="Sprite" type="Sprite2D" parent="."]
+texture = ExtResource("2_gear")

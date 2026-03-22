@@ -32,6 +32,10 @@ var start_pos: Vector2 # Where the player begins (set in _ready)
 # Starfield data (computed once, drawn every frame)
 var _star_positions := PackedVector2Array()
 var _star_sizes     := PackedFloat32Array()
+var _star_colors    := []   # Array of Color
+
+# Nebula blob data: [position, radius, color]
+var _nebula := []
 
 
 func _ready() -> void:
@@ -39,12 +43,33 @@ func _ready() -> void:
 	win_label.hide()
 	_update_score()
 
-	# Build a random starfield
 	var vp := get_viewport_rect().size
-	for _i in range(80):
+
+	# ── Nebula blobs (large semi-transparent coloured circles) ──
+	_nebula = [
+		[Vector2(vp.x * 0.72, vp.y * 0.28), 220.0, Color(0.30, 0.08, 0.55, 0.13)],
+		[Vector2(vp.x * 0.78, vp.y * 0.40), 160.0, Color(0.18, 0.08, 0.65, 0.10)],
+		[Vector2(vp.x * 0.65, vp.y * 0.55), 130.0, Color(0.40, 0.10, 0.55, 0.09)],
+		[Vector2(vp.x * 0.20, vp.y * 0.60), 180.0, Color(0.35, 0.12, 0.45, 0.10)],
+		[Vector2(vp.x * 0.50, vp.y * 0.50), 260.0, Color(0.08, 0.15, 0.50, 0.07)],
+		[Vector2(vp.x * 0.10, vp.y * 0.25), 140.0, Color(0.20, 0.05, 0.60, 0.08)],
+	]
+
+	# ── Starfield: 120 stars with colour tints ──
+	# Star colour palette: mostly white/blue-white, some warm yellow
+	var palettes := [
+		Color(1.00, 1.00, 1.00, 0.90),   # pure white
+		Color(0.85, 0.92, 1.00, 0.85),   # blue-white
+		Color(0.75, 0.88, 1.00, 0.80),   # cool blue
+		Color(1.00, 0.95, 0.80, 0.80),   # warm yellow
+		Color(1.00, 0.80, 0.70, 0.70),   # faint orange (red giant)
+	]
+	for _i in range(120):
 		_star_positions.append(Vector2(randf_range(0.0, vp.x), randf_range(0.0, vp.y)))
-		_star_sizes.append(randf_range(0.8, 2.2))
-	queue_redraw()   # Draw the stars once; they stay drawn until next queue_redraw
+		_star_sizes.append(randf_range(0.6, 2.4))
+		_star_colors.append(palettes[randi() % palettes.size()])
+
+	queue_redraw()
 
 	# Spawn all gears and asteroids
 	for _i in range(NUM_GEARS):
@@ -53,10 +78,27 @@ func _ready() -> void:
 		_spawn_asteroid()
 
 
-# Draw the starfield.  Called once after queue_redraw() in _ready().
+# Draw the nebula + starfield.  Called once after queue_redraw() in _ready().
 func _draw() -> void:
+	var vp := get_viewport_rect().size
+
+	# Solid deep-space background (slightly lighter than default clear colour)
+	draw_rect(Rect2(Vector2.ZERO, vp), Color(0.04, 0.02, 0.12, 1.0))
+
+	# Nebula blobs
+	for blob in _nebula:
+		draw_circle(blob[0], blob[1], blob[2])
+
+	# Stars
 	for i in _star_positions.size():
-		draw_circle(_star_positions[i], _star_sizes[i], Color(1.0, 1.0, 1.0, 0.7))
+		var sz: float = _star_sizes[i]
+		draw_circle(_star_positions[i], sz, _star_colors[i])
+		# Add a tiny cross-flare on the largest stars
+		if sz > 1.9:
+			var p  := _star_positions[i]
+			var c  := Color(_star_colors[i].r, _star_colors[i].g, _star_colors[i].b, 0.35)
+			draw_line(p + Vector2(-sz * 2.5, 0), p + Vector2(sz * 2.5, 0), c, 0.6)
+			draw_line(p + Vector2(0, -sz * 2.5), p + Vector2(0, sz * 2.5), c, 0.6)
 
 
 # ── Spawning ──────────────────────────────────────────────────────────────────
