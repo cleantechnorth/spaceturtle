@@ -116,8 +116,6 @@ func _spawn_asteroid() -> void:
 	var rock: Area2D = asteroid_scene.instantiate()
 	rock.position = _random_pos()
 	asteroids_node.add_child(rock)
-	# Listen for when the player touches this asteroid
-	rock.body_entered.connect(_on_asteroid_touched)
 
 
 # ── Event callbacks ───────────────────────────────────────────────────────────
@@ -140,12 +138,16 @@ func _on_gear_touched(body: Node2D, gear: Area2D) -> void:
 		_do_transition()
 
 
-# Fires when a physics body (our player) enters an asteroid's area.
-func _on_asteroid_touched(body: Node2D) -> void:
-	if body == player and not game_won:
-		# Send the turtle back to the start
-		player.position = start_pos
-		player.velocity  = Vector2.ZERO
+# Check asteroid proximity every frame – more reliable than body_entered signals.
+func _process(_delta: float) -> void:
+	if game_won:
+		return
+	for rock in asteroids_node.get_children():
+		# Combined radius: player 22 px + asteroid 24 px = 46 px
+		if rock.global_position.distance_to(player.global_position) < 46.0:
+			player.position = start_pos
+			player.velocity  = Vector2.ZERO
+			break
 
 
 # ── Helpers ───────────────────────────────────────────────────────────────────

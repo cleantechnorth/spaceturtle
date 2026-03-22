@@ -15,8 +15,14 @@ const FRICTION     := 0.92    # How quickly it slows down
                                # (0 = instant stop, 1 = never stops)
 
 func _physics_process(delta: float) -> void:
-	# Read which keys are held (returns a Vector2 between -1 and 1)
-	var dir := Input.get_vector("move_left", "move_right", "move_up", "move_down")
+	# Read which keys are held – read raw key state to avoid action-map issues
+	var dir := Vector2.ZERO
+	if Input.is_key_pressed(KEY_W) or Input.is_key_pressed(KEY_UP):    dir.y -= 1.0
+	if Input.is_key_pressed(KEY_S) or Input.is_key_pressed(KEY_DOWN):  dir.y += 1.0
+	if Input.is_key_pressed(KEY_A) or Input.is_key_pressed(KEY_LEFT):  dir.x -= 1.0
+	if Input.is_key_pressed(KEY_D) or Input.is_key_pressed(KEY_RIGHT): dir.x += 1.0
+	if dir.length() > 1.0:
+		dir = dir.normalized()
 
 	# Push the turtle in that direction
 	velocity += dir * ACCELERATION * delta
