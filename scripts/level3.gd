@@ -216,15 +216,12 @@ func _flash_player_red() -> void:
 	var tween := create_tween()
 	tween.tween_property(player, "modulate", Color(3.0, 0.5, 0.5), 0.07)
 	# Restore to shield-tint if they have a shield, otherwise white
-	tween.tween_property(
-		player, "modulate",
-		Color(0.55, 0.80, 1.0) if player.has_shield else Color(1.0, 1.0, 1.0),
-		0.22
-	)
+	var restore_color := Color(0.55, 0.80, 1.0) if player.has_shield else Color(1.0, 1.0, 1.0)
+	tween.tween_property(player, "modulate", restore_color, 0.22)
 
 
 func _update_boss_hp() -> void:
-	boss_hp_label.text = "Boss: " + "❤ " * boss_hp
+	boss_hp_label.text = "Boss HP: " + str(boss_hp) + " / " + str(BOSS_MAX_HP)
 
 
 func _update_score() -> void:
