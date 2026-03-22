@@ -176,18 +176,22 @@ func _show_complete() -> void:
 	$UI.add_child(overlay)
 
 	var title := Label.new()
-	title.text = "Level 3\nPetal Fields\nComing Soon!"
+	title.text = "Level 3\nPetal Fields"
 	title.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	title.add_theme_font_size_override("font_size", 48)
-	title.add_theme_color_override("font_color", Color(1.0, 0.9, 0.3, 1.0))
+	title.add_theme_font_size_override("font_size", 52)
+	title.add_theme_color_override("font_color", Color(1.0, 0.4, 0.7, 1.0))
 	title.set_anchors_preset(Control.PRESET_CENTER)
-	title.offset_left   = -280.0
-	title.offset_top    = -80.0
-	title.offset_right  =  280.0
-	title.offset_bottom =  80.0
+	title.offset_left   = -240.0
+	title.offset_top    = -60.0
+	title.offset_right  =  240.0
+	title.offset_bottom =  60.0
 	title.modulate      = Color(1.0, 1.0, 1.0, 0.0)
 	$UI.add_child(title)
 
 	var tween := create_tween()
 	tween.tween_property(overlay, "color:a", 1.0, 1.2)
 	tween.tween_property(title, "modulate:a", 1.0, 0.6)
+	tween.tween_interval(1.8)
+	tween.tween_callback(
+		func() -> void: get_tree().change_scene_to_file("res://scenes/Level3.tscn")
+	)

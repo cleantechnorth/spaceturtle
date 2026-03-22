@@ -1,0 +1,81 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100" height="100">
+  <defs>
+    <!-- Petal gradient: light pink core to deep magenta edge -->
+    <radialGradient id="pg" cx="35%" cy="30%" r="65%">
+      <stop offset="0%"   stop-color="#FF90CC"/>
+      <stop offset="55%"  stop-color="#E8207C"/>
+      <stop offset="100%" stop-color="#881040"/>
+    </radialGradient>
+    <!-- Boss body: dark green -->
+    <radialGradient id="bg" cx="40%" cy="32%" r="62%">
+      <stop offset="0%"   stop-color="#4A8A3A"/>
+      <stop offset="55%"  stop-color="#1A5018"/>
+      <stop offset="100%" stop-color="#0A280A"/>
+    </radialGradient>
+    <!-- Eye white -->
+    <radialGradient id="ew" cx="35%" cy="30%" r="62%">
+      <stop offset="0%"   stop-color="#FFFFFF"/>
+      <stop offset="100%" stop-color="#D8E8D8"/>
+    </radialGradient>
+  </defs>
+
+  <!-- ── 8 petal-blades (drawn behind body) ── -->
+  <!-- Each petal: pointed oval from centre (50,50) to tip (50,6), rotated around centre -->
+  <g fill="url(#pg)" stroke="#881040" stroke-width="0.9" stroke-linejoin="round">
+    <path d="M 50,50 C 45,38 44,18 50,6 C 56,18 55,38 50,50 Z" transform="rotate(  0,50,50)"/>
+    <path d="M 50,50 C 45,38 44,18 50,6 C 56,18 55,38 50,50 Z" transform="rotate( 45,50,50)"/>
+    <path d="M 50,50 C 45,38 44,18 50,6 C 56,18 55,38 50,50 Z" transform="rotate( 90,50,50)"/>
+    <path d="M 50,50 C 45,38 44,18 50,6 C 56,18 55,38 50,50 Z" transform="rotate(135,50,50)"/>
+    <path d="M 50,50 C 45,38 44,18 50,6 C 56,18 55,38 50,50 Z" transform="rotate(180,50,50)"/>
+    <path d="M 50,50 C 45,38 44,18 50,6 C 56,18 55,38 50,50 Z" transform="rotate(225,50,50)"/>
+    <path d="M 50,50 C 45,38 44,18 50,6 C 56,18 55,38 50,50 Z" transform="rotate(270,50,50)"/>
+    <path d="M 50,50 C 45,38 44,18 50,6 C 56,18 55,38 50,50 Z" transform="rotate(315,50,50)"/>
+  </g>
+
+  <!-- Petal centre veins (sharp highlight down the middle of each blade) -->
+  <g stroke="#FFAAD8" stroke-width="0.7" fill="none" opacity="0.75">
+    <line x1="50" y1="48" x2="50" y2="8"  transform="rotate(  0,50,50)"/>
+    <line x1="50" y1="48" x2="50" y2="8"  transform="rotate( 45,50,50)"/>
+    <line x1="50" y1="48" x2="50" y2="8"  transform="rotate( 90,50,50)"/>
+    <line x1="50" y1="48" x2="50" y2="8"  transform="rotate(135,50,50)"/>
+    <line x1="50" y1="48" x2="50" y2="8"  transform="rotate(180,50,50)"/>
+    <line x1="50" y1="48" x2="50" y2="8"  transform="rotate(225,50,50)"/>
+    <line x1="50" y1="48" x2="50" y2="8"  transform="rotate(270,50,50)"/>
+    <line x1="50" y1="48" x2="50" y2="8"  transform="rotate(315,50,50)"/>
+  </g>
+
+  <!-- ── Boss body ── -->
+  <circle cx="50" cy="50" r="23" fill="url(#bg)" stroke="#0A280A" stroke-width="1.8"/>
+
+  <!-- Scale bumps on body -->
+  <circle cx="44" cy="55" r="2.5" fill="#0A280A" opacity="0.30"/>
+  <circle cx="56" cy="55" r="2.5" fill="#0A280A" opacity="0.30"/>
+  <circle cx="50" cy="60" r="2.0" fill="#0A280A" opacity="0.25"/>
+
+  <!-- ── Eyes ── -->
+  <circle cx="43" cy="46" r="7"   fill="url(#ew)" stroke="#1A5018" stroke-width="0.8"/>
+  <circle cx="57" cy="46" r="7"   fill="url(#ew)" stroke="#1A5018" stroke-width="0.8"/>
+  <!-- Irises -->
+  <circle cx="44" cy="47" r="4.2" fill="#CC2060"/>
+  <circle cx="58" cy="47" r="4.2" fill="#CC2060"/>
+  <!-- Pupils -->
+  <circle cx="44" cy="47" r="2.5" fill="#0A0408"/>
+  <circle cx="58" cy="47" r="2.5" fill="#0A0408"/>
+  <!-- Eye shine -->
+  <circle cx="42" cy="45" r="1.4" fill="white" opacity="0.80"/>
+  <circle cx="56" cy="45" r="1.4" fill="white" opacity="0.80"/>
+
+  <!-- ── Mouth (wide grin with teeth) ── -->
+  <!-- Grin cavity -->
+  <path d="M 37,57 Q 50,70 63,57 L 62,60 Q 50,73 38,60 Z"
+        fill="#0A1A0A" stroke="#0A280A" stroke-width="0.6"/>
+  <!-- Teeth -->
+  <rect x="40.0" y="57" width="5" height="5.5" rx="1.0" fill="#F0F8F0"/>
+  <rect x="47.0" y="57" width="5" height="5.5" rx="1.0" fill="#F0F8F0"/>
+  <rect x="54.0" y="57" width="5" height="5.5" rx="1.0" fill="#F0F8F0"/>
+
+  <!-- ── Specular highlight on body (top-left lit) ── -->
+  <ellipse cx="43" cy="38" rx="9" ry="5"
+           fill="white" opacity="0.12"
+           transform="rotate(-20,43,38)"/>
+</svg>

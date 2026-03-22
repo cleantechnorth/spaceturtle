@@ -1,0 +1,61 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="48" height="48">
+  <defs>
+    <!-- Outer brass rim -->
+    <radialGradient id="br" cx="36%" cy="30%" r="64%">
+      <stop offset="0%"   stop-color="#F8EA80"/>
+      <stop offset="45%"  stop-color="#C8A030"/>
+      <stop offset="100%" stop-color="#6B4A0E"/>
+    </radialGradient>
+    <!-- Inner steel face -->
+    <radialGradient id="st" cx="38%" cy="32%" r="62%">
+      <stop offset="0%"   stop-color="#6888B8"/>
+      <stop offset="55%"  stop-color="#2A4878"/>
+      <stop offset="100%" stop-color="#0C1C3A"/>
+    </radialGradient>
+    <!-- Centre gear hub -->
+    <radialGradient id="hb" cx="38%" cy="32%" r="60%">
+      <stop offset="0%"   stop-color="#E8D060"/>
+      <stop offset="55%"  stop-color="#A87820"/>
+      <stop offset="100%" stop-color="#5A3C08"/>
+    </radialGradient>
+  </defs>
+
+  <!-- ── Outer brass rim ── -->
+  <circle cx="24" cy="24" r="23" fill="url(#br)" stroke="#5A3C08" stroke-width="1.2"/>
+
+  <!-- ── Inner steel face ── -->
+  <circle cx="24" cy="24" r="18" fill="url(#st)" stroke="#4A6090" stroke-width="0.8"/>
+
+  <!-- ── Engraved ring on face ── -->
+  <circle cx="24" cy="24" r="13.5"
+          fill="none" stroke="#1A3060" stroke-width="1.2" opacity="0.55"/>
+
+  <!-- ── Gear emblem ── -->
+  <!-- Gear ring -->
+  <circle cx="24" cy="24" r="8" fill="none" stroke="#C8A030" stroke-width="2.4"/>
+  <!-- Spokes (4 arms) -->
+  <line x1="24" y1="16.5" x2="24" y2="31.5" stroke="#C8A030" stroke-width="1.6" opacity="0.70"/>
+  <line x1="16.5" y1="24" x2="31.5" y2="24" stroke="#C8A030" stroke-width="1.6" opacity="0.70"/>
+  <!-- Gear teeth at compass points -->
+  <rect x="22.5" y="13.5" width="3" height="3"   rx="0.4" fill="#C8A030"/>
+  <rect x="22.5" y="31.5" width="3" height="3"   rx="0.4" fill="#C8A030"/>
+  <rect x="13.5" y="22.5" width="3" height="3"   rx="0.4" fill="#C8A030"/>
+  <rect x="31.5" y="22.5" width="3" height="3"   rx="0.4" fill="#C8A030"/>
+  <!-- Hub -->
+  <circle cx="24" cy="24" r="3.8" fill="url(#hb)" stroke="#5A3C08" stroke-width="0.8"/>
+  <circle cx="24" cy="24" r="1.8" fill="#1A0C02"/>
+
+  <!-- ── Rivets on brass rim (N/S/E/W) ── -->
+  <circle cx="24" cy="3"  r="1.6" fill="#E0C048"/>
+  <circle cx="24" cy="45" r="1.6" fill="#E0C048"/>
+  <circle cx="3"  cy="24" r="1.6" fill="#E0C048"/>
+  <circle cx="45" cy="24" r="1.6" fill="#E0C048"/>
+
+  <!-- ── Specular highlight (top-left lit) ── -->
+  <ellipse cx="17" cy="14" rx="9" ry="5"
+           fill="white" opacity="0.16"
+           transform="rotate(-30,17,14)"/>
+
+  <!-- Small glint on steel face -->
+  <circle cx="16" cy="16" r="1.8" fill="white" opacity="0.30"/>
+</svg>

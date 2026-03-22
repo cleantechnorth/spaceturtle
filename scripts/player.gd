@@ -7,6 +7,8 @@ extends CharacterBody2D
 # a little after you let go, like floating in zero gravity.
 # ──────────────────────────────────────────────────────────────────────────────
 
+var has_shield := false   # Set to true by level3.gd when shield is collected
+
 const ACCELERATION := 600.0   # How quickly the turtle speeds up
 const MAX_SPEED    := 260.0   # The fastest it can go
 const FRICTION     := 0.92    # How quickly it slows down

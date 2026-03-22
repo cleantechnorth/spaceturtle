@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=3 uid="uid://petalattack001"]
+
+[ext_resource type="Script"    path="res://scripts/petal_attack.gd"  id="1_atk"]
+[ext_resource type="Texture2D" path="res://assets/petal_attack.svg"  id="2_atk"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_1"]
+radius = 9.0
+
+; ── Scene tree ──────────────────────────────────────────────────────────────
+; PetalAttack (Area2D)       ← a flying petal-blade; runs petal_attack.gd
+;   CollisionShape2D         ← small circle for player/boss hit detection
+;   Sprite2D                 ← petal_attack.svg (32×32, centred)
+
+[node name="PetalAttack" type="Area2D"]
+script = ExtResource("1_atk")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_1")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_atk")
