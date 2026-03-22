@@ -1,0 +1,34 @@
+[gd_scene load_steps=3 format=3 uid="uid://level2001"]
+
+[ext_resource type="Script" path="res://scripts/level2.gd" id="1_level2"]
+[ext_resource type="PackedScene" uid="uid://player001" path="res://scenes/Player.tscn" id="2_player"]
+
+; ── Scene tree ──────────────────────────────────────────────────────────────
+; Level2 (Node2D)            ← root node, runs level2.gd, draws the nature background
+;   Player                   ← the turtle (same as Level 1)
+;   Gears     (Node2D)       ← empty container; mini gears added here at runtime
+;   UI (CanvasLayer)         ← HUD always drawn on top
+;     ScoreLabel (Label)     ← mini gear counter
+
+[node name="Level2" type="Node2D"]
+script = ExtResource("1_level2")
+
+; Player starts in the middle of the screen
+[node name="Player" parent="." instance=ExtResource("2_player")]
+position = Vector2(512.0, 300.0)
+
+; Container for runtime-spawned mini gears
+[node name="Gears" type="Node2D" parent="."]
+
+; HUD
+[node name="UI" type="CanvasLayer" parent="."]
+
+; Score label – top-left corner
+[node name="ScoreLabel" type="Label" parent="UI"]
+offset_left = 20.0
+offset_top = 20.0
+offset_right = 380.0
+offset_bottom = 60.0
+text = "Mini Gears: 0 / 30"
+theme_override_font_sizes/font_size = 24
+theme_override_colors/font_color = Color(0.1, 0.1, 0.1, 1.0)

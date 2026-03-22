@@ -10,8 +10,8 @@ extends Node2D
 #   • Drawing a simple starfield background
 # ──────────────────────────────────────────────────────────────────────────────
 
-const GEARS_TO_WIN  := 10     # Collect this many gears to win
-const NUM_GEARS     := 10     # How many gears to spawn
+const GEARS_TO_WIN  := 15     # Collect this many gears to win
+const NUM_GEARS     := 15     # How many gears to spawn
 const NUM_ASTEROIDS := 6      # How many asteroids to spawn
 
 # References to nodes already in the scene
@@ -137,7 +137,7 @@ func _on_gear_touched(body: Node2D, gear: Area2D) -> void:
 	# Check win condition
 	if score >= GEARS_TO_WIN:
 		game_won = true
-		win_label.show()
+		_do_transition()
 
 
 # Fires when a physics body (our player) enters an asteroid's area.
@@ -152,6 +152,38 @@ func _on_asteroid_touched(body: Node2D) -> void:
 
 func _update_score() -> void:
 	score_label.text = "Gears: %d / %d" % [score, GEARS_TO_WIN]
+
+
+# Fades to black, shows the Level 2 title, then loads Earth Isles.
+func _do_transition() -> void:
+	# Full-screen black overlay added to UI so it's always on top
+	var overlay := ColorRect.new()
+	overlay.color = Color(0.0, 0.0, 0.0, 0.0)
+	overlay.set_anchors_preset(Control.PRESET_FULL_RECT)
+	$UI.add_child(overlay)
+
+	# "Earth Isles" title card
+	var title := Label.new()
+	title.text = "Level 2\nEarth Isles"
+	title.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	title.add_theme_font_size_override("font_size", 52)
+	title.add_theme_color_override("font_color", Color(0.6, 1.0, 0.4, 1.0))
+	title.set_anchors_preset(Control.PRESET_CENTER)
+	title.offset_left   = -240.0
+	title.offset_top    = -60.0
+	title.offset_right  =  240.0
+	title.offset_bottom =  60.0
+	title.modulate      = Color(1.0, 1.0, 1.0, 0.0)
+	$UI.add_child(title)
+
+	# Sequence: fade screen to black → reveal title → pause → load Level 2
+	var tween := create_tween()
+	tween.tween_property(overlay, "color:a", 1.0, 1.2)
+	tween.tween_property(title, "modulate:a", 1.0, 0.6)
+	tween.tween_interval(1.8)
+	tween.tween_callback(
+		func() -> void: get_tree().change_scene_to_file("res://scenes/Level2.tscn")
+	)
 
 
 # Returns a random position on screen that isn't too close to the player start.
