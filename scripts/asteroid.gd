@@ -14,7 +14,7 @@ func _ready() -> void:
 	var angle := randf_range(0.0, TAU)             # TAU = full circle in radians
 	drift = Vector2(cos(angle), sin(angle)) * randf_range(30.0, 75.0)
 
-func _process(delta: float) -> void:
+func _physics_process(delta: float) -> void:
 	# Move in the drift direction
 	position += drift * delta
 

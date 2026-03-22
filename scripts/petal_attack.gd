@@ -20,7 +20,7 @@ func launch(target_pos: Vector2) -> void:
 	rotation = dir.angle() + PI * 0.5
 
 
-func _process(delta: float) -> void:
+func _physics_process(delta: float) -> void:
 	position += velocity * delta
 	rotation   = velocity.angle() + PI * 0.5
 
