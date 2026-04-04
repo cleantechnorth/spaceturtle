@@ -64,7 +64,7 @@ func _process(delta: float) -> void:
 
 func _input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion:
-		var mp := event.position
+		var mp: Vector2 = (event as InputEventMouseMotion).position
 		var prev_p := _play_hover
 		var prev_e := _editor_hover
 		_play_hover   = _play_rect.has_point(mp)
@@ -74,7 +74,7 @@ func _input(event: InputEvent) -> void:
 
 	elif event is InputEventMouseButton:
 		if event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
-			var mp := event.position
+			var mp: Vector2 = (event as InputEventMouseButton).position
 			if _play_rect.has_point(mp):
 				get_tree().change_scene_to_file("res://scenes/Main.tscn")
 			elif _editor_rect.has_point(mp):

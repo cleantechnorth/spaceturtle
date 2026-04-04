@@ -85,7 +85,7 @@ func _process(delta: float) -> void:
 
 func _input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion:
-		var mp          := event.position
+		var mp: Vector2 = (event as InputEventMouseMotion).position
 		var prev_sw     := _hovered_swatch
 		var prev_back   := _back_hover
 		_hovered_swatch = -1
@@ -103,7 +103,7 @@ func _input(event: InputEvent) -> void:
 
 	elif event is InputEventMouseButton:
 		if event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
-			var mp := event.position
+			var mp: Vector2 = (event as InputEventMouseButton).position
 			# Swatch click
 			for i in range(_swatch_centers.size()):
 				if (_swatch_centers[i] as Vector2).distance_to(mp) <= SWATCH_R + 5.0:
