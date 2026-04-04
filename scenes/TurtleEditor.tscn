@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://turtleeditor001"]
+
+[ext_resource type="Script" path="res://scripts/turtle_editor.gd" id="1_te"]
+
+; ── Scene tree ──────────────────────────────────────────────────────────────
+; TurtleEditor (Node2D)  ← root; draws starfield + swatches via _draw(),
+;                           adds turtle Sprite2D at runtime in _ready()
+
+[node name="TurtleEditor" type="Node2D"]
+script = ExtResource("1_te")
