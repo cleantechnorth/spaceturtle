@@ -9,6 +9,10 @@ extends CharacterBody2D
 
 var has_shield := false   # Set to true by level3.gd when shield is collected
 
+func _ready() -> void:
+	# Apply the colour tint chosen in the Turtle Icon Editor
+	$Sprite.modulate = TurtleSettings.turtle_modulate
+
 const ACCELERATION := 600.0   # How quickly the turtle speeds up
 const MAX_SPEED    := 260.0   # The fastest it can go
 const FRICTION     := 0.92    # How quickly it slows down

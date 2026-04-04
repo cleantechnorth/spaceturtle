@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://titlescreen001"]
+
+[ext_resource type="Script" path="res://scripts/title_screen.gd" id="1_ts"]
+
+; ── Scene tree ──────────────────────────────────────────────────────────────
+; TitleScreen (Node2D)   ← root; draws starfield + title + buttons via _draw()
+
+[node name="TitleScreen" type="Node2D"]
+script = ExtResource("1_ts")
