@@ -1,15 +1,15 @@
 [gd_scene load_steps=4 format=3 uid="uid://player001"]
 
 [ext_resource type="Script"    path="res://scripts/player.gd" id="1_player"]
-[ext_resource type="Texture2D" path="res://assets/turtle.svg"  id="2_turtle"]
+[ext_resource type="Texture2D" path="res://assets/turtle.png"  id="2_turtle"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_1"]
-radius = 22.0
+radius = 30.0
 
 ; ── Scene tree ──────────────────────────────────────────────────────────────
 ; Player (CharacterBody2D)   ← moves around the screen
 ;   CollisionShape2D         ← invisible circle used for physics collisions
-;   Sprite                   ← steampunk turtle SVG (96×64 px, centred)
+;   Sprite                   ← steampunk pixel-art turtle (512×512 scaled to ~105 px)
 
 [node name="Player" type="CharacterBody2D"]
 script = ExtResource("1_player")
@@ -20,3 +20,4 @@ shape = SubResource("CircleShape2D_1")
 
 [node name="Sprite" type="Sprite2D" parent="."]
 texture = ExtResource("2_turtle")
+scale = Vector2(0.21, 0.21)
